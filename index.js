@@ -24,9 +24,18 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+var dateController = require('./api/dateController');
 
+app.use('/api', dateController);
+
+app.get("/api/:you?", function (req, res) {
+  res.json({greeting: `you passed in ${req.params.you}`});
+});
+
+
+var PORT = process.env.PORT || 3000;
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
